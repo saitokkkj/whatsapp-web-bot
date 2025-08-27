@@ -233,7 +233,8 @@
 				Cool ${title}! Some commands that you can send me:
 
 				1. *@TIME*
-				2. *@JOKE*`
+				2. *@JOKE*
+				3. *Ola* or other greetings`
 		}
 
 		if (lastMsg.toUpperCase().indexOf('@TIME') > -1){
@@ -245,6 +246,19 @@
 
 		if (lastMsg.toUpperCase().indexOf('@JOKE') > -1){
 			sendText = jokeList[rand(jokeList.length - 1)];
+		}
+
+		// Check for greetings
+		const greetings = ['OLA', 'OLÁ', 'HELLO', 'HI', 'HEY', 'HOLA', 'GOOD MORNING', 'GOOD AFTERNOON', 'GOOD EVENING'];
+		const upperMsg = lastMsg.toUpperCase();
+		if (greetings.some(greeting => upperMsg.indexOf(greeting) > -1)) {
+			const responses = [
+				`Ola ${title}! How can I help you today? Send *@HELP* to see what I can do! 😊`,
+				`Hey there ${title}! Nice to hear from you! Type *@HELP* for available commands.`,
+				`Hello ${title}! Great to see you! Try *@HELP* to see what I can do for you.`,
+				`Hi ${title}! Hope you're having a great day! Send *@HELP* for my commands.`
+			];
+			sendText = responses[rand(responses.length - 1)];
 		}
 		
 		// that's sad, there's not to send back...
